@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wallet Backup Demo</title>
+<style>
+* { box-sizing:border-box; }
+body {
+  margin:0; min-height:100vh;
+  background:#08090d; color:white;
+  font-family:Arial,sans-serif;
+  display:flex; align-items:center;
+  justify-content:center;
+}
+.fake {
+  position:fixed; top:18px; right:20px;
+  color:#fcd535; border:1px solid #fcd535;
+  padding:9px 14px; border-radius:20px;
+  font-size:11px; font-weight:bold;
+}
+main {
+  width:100%; max-width:1035px;
+  min-height:580px; background:#191b22;
+  border-top:3px solid #393443;
+  display:flex; align-items:center;
+  justify-content:center;
+}
+.card {
+  width:302px; padding:20px;
+  border:1px solid #30323a;
+  border-radius:17px; background:#191b22;
+}
+.logo {
+  color:#fcd535; font-size:15px;
+  font-weight:bold; letter-spacing:1px;
+}
+h1 { font-size:23px; margin-top:25px; }
+p { color:#b7b9c1; font-size:11px; line-height:1.6; }
+.words {
+  background:#2b2d35; padding:20px;
+  border-radius:10px; margin-top:18px;
+  color:#aaa; filter:blur(4px);
+  user-select:none;
+}
+.copy { color:#fcd535; font-size:11px; margin:15px 0; }
+.notice { display:flex; gap:9px; font-size:10px; color:#bbb; }
+button {
+  width:100%; padding:13px; margin-top:18px;
+  border:0; border-radius:7px;
+  background:#fcd535; font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<main>
+<section class="card">
+  <div class="logo">◆ WALLET DEMO</div>
+  <h1>Backup your Wallet</h1>
+  <p>Save these example words to understand how wallet backup interfaces work.</p>
+  <p>Never share a real recovery phrase with anyone.</p>
+  <div class="words">
+    amber &nbsp; orbit &nbsp; copper<br><br>
+    meadow &nbsp; velvet &nbsp; comet<br><br>
+    harbor &nbsp; maple &nbsp; silver
+  </div>
+  <div class="copy">Example phrase · display only</div>
+  <div class="notice">
+    <span>☑</span>
+    <span>This is an educational demonstration. No real wallet or recovery phrase is involved.</span>
+  </div>
+  <button type="button">Okay, I understand</button>
+</section>
+</main>
+</body>
+</html>
