@@ -1,281 +1,269 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Backup your Wallet</title>
-
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: #08090d;
-  color: white;
-  font-family: Arial, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-
-  top: 18px;
-  right: 20px;
-  color: #fcd535;
-  border: 1px solid #fcd535;
-  padding: 9px 14px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: bold;
-}
-
-main {
-  width: 100%;
-  max-width: 1035px;
-  min-height: 580px;
-  background: #191b22;
-  border-top: 3px solid #393443;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.card {
-  width: 302px;
-  padding: 20px;
-  border: 1px solid #30323a;
-  border-radius: 17px;
-  background: #191b22;
-}
-
-.logo {
-  color: #fcd535;
-  font-size: 15px;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-h1 {
-  font-size: 23px;
-  margin-top: 25px;
-}
-
-p {
-  color: #b7b9c1;
-  font-size: 11px;
-  line-height: 1.6;
-}
-
-.demo-label {
-  color: #fcd535;
-  font-size: 10px;
-  margin-top: 15px;
-}
-
-.words {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 7px;
-  margin-top: 12px;
-}
-
-.word {
-  display: flex;
-  align-items: center;
-  background: #2b2d35;
-  border: 1px solid #393b44;
-  border-radius: 6px;
-  padding: 9px 7px;
-  min-width: 0;
-}
-
-.word span {
-  color: #858791;
-  font-size: 10px;
-  margin-right: 6px;
-}
-
-.word input {
-  width: 100%;
-  min-width: 0;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: white;
-  font-size: 10px;
-}
-
-.word input::placeholder {
-  color: #858791;
-}
-
-button {
-  width: 100%;
-  padding: 13px;
-  margin-top: 18px;
-  border: 0;
-  border-radius: 7px;
-  background: #fcd535;
-  color: #111;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:disabled {
-  opacity: .45;
-  cursor: not-allowed;
-}
-
-.secondary {
-  background: #30323a;
-  color: white;
-  margin-top: 9px;
-}
-
-.message {
-  display: none;
-  color: #b7e4be;
-  font-size: 11px;
-  margin-top: 12px;
-  line-height: 1.5;
-}
-
-#complete {
-  display: none;
-}
-
-footer {
-  font-size: 9px;
-  color: #858791;
-  text-align: center;
-  margin-top: 15px;
-}
-
-@media(max-width: 450px) {
-  main { padding: 12px; }
-  .card { padding: 17px; }
-}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    background: #0b0e11;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    color: #eaecef;
+  }
+  .card {
+    width: 100%;
+    max-width: 380px;
+    background: #1e2329;
+    border-radius: 16px;
+    padding: 32px 28px 28px;
+    border: 1px solid #2b3139;
+  }
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .logo-row svg {
+    width: 26px;
+    height: 26px;
+  }
+  .logo-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f0b90b;
+    letter-spacing: 0.4px;
+  }
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: #eaecef;
+  }
+  .info {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #848e9c;
+    margin-bottom: 6px;
+  }
+  .warn {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #848e9c;
+    margin-bottom: 22px;
+  }
+  .phrase-box {
+    background: #2b3139;
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 12px;
+    min-height: 56px;
+  }
+  #phrase {
+    font-size: 15px;
+    line-height: 1.45;
+    color: #eaecef;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    word-break: break-word;
+    flex: 1;
+  }
+  #phrase.blurred {
+    filter: blur(7px);
+    user-select: none;
+  }
+  .eye {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #848e9c;
+    padding: 4px;
+    display: flex;
+    flex-shrink: 0;
+  }
+  .eye:hover { color: #eaecef; }
+  .copy {
+    background: none;
+    border: none;
+    color: #f0b90b;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 24px;
+    padding: 0;
+  }
+  .copy:hover { text-decoration: underline; }
+  .check-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .check-row input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f0b90b;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 1px;
+    position: relative;
+  }
+  .check-row input:checked {
+    background: #f0b90b;
+  }
+  .check-row input:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid #1e2329;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+  .check-row label {
+    font-size: 14px;
+    line-height: 1.45;
+    color: #eaecef;
+    cursor: pointer;
+    user-select: none;
+  }
+  .btn {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    background: #f0b90b;
+    color: #1e2329;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .btn:not(:disabled):hover {
+    filter: brightness(1.06);
+  }
+  #done {
+    display: none;
+    text-align: center;
+  }
+  #done h1 {
+    margin-bottom: 12px;
+  }
+  #done p {
+    color: #848e9c;
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
 </style>
 </head>
+<body>
 
- 
+<div class="card" id="main">
+  <div class="logo-row">
+    <svg viewBox="0 0 126.61 126.61" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#F0B90B" d="M38.73 53.2l24.59-24.58 24.6 24.6 14.3-14.31L63.32 0 24.41 38.91l14.32 14.29zM0 63.31l14.3-14.31 14.31 14.31-14.31 14.3L0 63.31zM38.73 73.41l24.59 24.59 24.6-24.6 14.31 14.29-38.9 38.91L24.41 87.72l14.32-14.31zM98 63.31l14.3-14.31 14.31 14.31-14.31 14.3L98 63.31zM77.83 63.3l-14.51-14.52-10.73 10.73-1.98 1.97-1.98 1.99 14.51 14.51 14.52-14.51z"/>
+    </svg>
+    <span class="logo-text">BINANCE</span>
+  </div>
 
-<section class="card" id="backup">
+  <h1>Backup your Wallet</h1>
+  <p class="info">Save these words to a password manager or write down and store in a secure place.</p>
+  <p class="warn">Do not share these words with anyone verbally.</p>
 
-<div class="logo">◆ BINANCE</div>
+  <div class="phrase-box">
+    <div id="phrase" class="blurred">apple banana cherry dragon eagle forest garden honey island jungle kite lemon</div>
+    <button class="eye" onclick="toggle()" aria-label="Show / hide">
+      <svg id="eyeSvg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+    </button>
+  </div>
 
-<h1>Backup your Wallet</h1>
+  <button class="copy" onclick="copy()">Copy to clipboard</button>
 
+  <div class="check-row">
+    <input type="checkbox" id="ack" onchange="ready()">
+    <label for="ack">I understand that if I lose my recovery phrase, I'll lose all of the crypto in my wallet.</label>
+  </div>
 
-
-<div class="demo-label">
-12-Word Recovery
+  <button class="btn" id="ok" disabled onclick="finish()">Okay, I understand</button>
 </div>
 
-<div class="words" id="words"></div>
-
-<button id="continue" disabled onclick="continue()">
-Okay, I understand
-</button>
-
-<button class="secondary" onclick="reset()">
-Reset fields
-</button>
-
-<div class="message" id="message"></div>
-
-
-
-</section>
-
-<section class="card" id="complete">
-
-<div class="logo">◆ BINANCE</div>
-
-<h1>Demo completed</h1>
-
-<p>
-You have successfully recovered your wallet
-</p>
-
-<button onclick="goBack()">Back</button>
-
-</section>
-
-</main>
+<div class="card" id="done">
+  <div class="logo-row">
+    <svg viewBox="0 0 126.61 126.61" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#F0B90B" d="M38.73 53.2l24.59-24.58 24.6 24.6 14.3-14.31L63.32 0 24.41 38.91l14.32 14.29zM0 63.31l14.3-14.31 14.31 14.31-14.31 14.3L0 63.31zM38.73 73.41l24.59 24.59 24.6-24.6 14.31 14.29-38.9 38.91L24.41 87.72l14.32-14.31zM98 63.31l14.3-14.31 14.31 14.31-14.31 14.3L98 63.31zM77.83 63.3l-14.51-14.52-10.73 10.73-1.98 1.97-1.98 1.99 14.51 14.51 14.52-14.51z"/>
+    </svg>
+    <span class="logo-text">BINANCE</span>
+  </div>
+  <h1>Backup complete</h1>
+  <p>Your recovery phrase has been noted. Keep it offline and safe.</p>
+  <button class="btn" onclick="back()">Done</button>
+</div>
 
 <script>
+  const phrase = document.getElementById("phrase");
+  const ok = document.getElementById("ok");
+  const ack = document.getElementById("ack");
+  const eyeSvg = document.getElementById("eyeSvg");
+  const words = "apple banana cherry dragon eagle forest garden honey island jungle kite lemon";
 
-// CREATE 12 EDITABLE  FIELDS
-const container = document.getElementById("words");
-
-for (let i = 1; i <= 12; i++) {
-  const field = document.createElement("div");
-  field.className = "word";
-
-  field.innerHTML = `
-    <span>${i}.</span>
-    <input
-      type="text"
-      
-      maxlength="24"
-      autocomplete="off"
-     
-  container.appendChild(field);
-}
-
-// CHECK THAT ALL ENTRIES ARE FICTIONAL DEMO TEXT
-function continueDemo() {
-  const inputs = [...document.querySelectorAll(".word input")];
-
-  const valid = inputs.every(input =>
-    /^DEMO-[A-Z0-9]+$/i.test(input.value.trim())
-  );
-
-  const message = document.getElementById("message");
-
-  if (!valid) {
-    message.style.display = "block";
-    message.textContent =
-      "All 12 entries must use fictional DEMO- text.";
-    return;
+  function toggle() {
+    const isBlur = phrase.classList.toggle("blurred");
+    if (isBlur) {
+      eyeSvg.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+    } else {
+      eyeSvg.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+    }
   }
 
-  document.getElementById("backup").style.display = "none";
-  document.getElementById("complete").style.display = "block";
-}
+  function copy() {
+    navigator.clipboard.writeText(words).then(() => {
+      const btn = document.querySelector(".copy");
+      const old = btn.textContent;
+      btn.textContent = "Copied!";
+      setTimeout(() => btn.textContent = old, 1400);
+    });
+  }
 
-// ENABLE BUTTON WHEN ALL FIELDS ARE COMPLETED
-container.addEventListener("input", () => {
-  const inputs = [...document.querySelectorAll(".word input")];
+  function ready() {
+    ok.disabled = !ack.checked;
+  }
 
-  document.getElementById("continue").disabled =
-    !inputs.every(input =>
-      /^DEMO-[A-Z0-9]+$/i.test(input.value.trim())
-    );
-});
+  function finish() {
+    document.getElementById("main").style.display = "none";
+    document.getElementById("done").style.display = "block";
+  }
 
-// RESET
-function resetDemo() {
-  document.querySelectorAll(".word input").forEach(input => {
-    input.value = "";
-  });
-
-  document.getElementById("continue").disabled = true;
-  document.getElementById("message").style.display = "none";
-}
-
-// BACK
-function goBack() {
-  document.getElementById("complete").style.display = "none";
-  document.getElementById("backup").style.display = "block";
-}
-
+  function back() {
+    document.getElementById("done").style.display = "none";
+    document.getElementById("main").style.display = "block";
+    ack.checked = false;
+    ok.disabled = true;
+    if (!phrase.classList.contains("blurred")) {
+      phrase.classList.add("blurred");
+      eyeSvg.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+    }
+  }
 </script>
-
 </body>
 </html>
