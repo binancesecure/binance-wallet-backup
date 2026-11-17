@@ -4,12 +4,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wallet Backup Demo</title>
+<title>Backup your Wallet</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -23,8 +21,7 @@ body {
   padding: 20px;
 }
 
-.fake {
-  position: fixed;
+
   top: 18px;
   right: 20px;
   color: #fcd535;
@@ -44,13 +41,12 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 25px;
+  padding: 20px;
 }
 
 .card {
-  width: 100%;
-  max-width: 390px;
-  padding: 24px;
+  width: 302px;
+  padding: 20px;
   border: 1px solid #30323a;
   border-radius: 17px;
   background: #191b22;
@@ -70,26 +66,21 @@ h1 {
 
 p {
   color: #b7b9c1;
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.6;
 }
 
-.demo-notice {
-  background: #292713;
-  border: 1px solid #65551a;
-  padding: 12px;
-  border-radius: 8px;
+.demo-label {
   color: #fcd535;
-  font-size: 11px;
-  line-height: 1.5;
-  margin: 18px 0;
+  font-size: 10px;
+  margin-top: 15px;
 }
 
 .words {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 9px;
-  margin-top: 20px;
+  gap: 7px;
+  margin-top: 12px;
 }
 
 .word {
@@ -97,23 +88,25 @@ p {
   align-items: center;
   background: #2b2d35;
   border: 1px solid #393b44;
-  border-radius: 7px;
-  padding: 10px;
+  border-radius: 6px;
+  padding: 9px 7px;
+  min-width: 0;
 }
 
 .word span {
   color: #858791;
   font-size: 10px;
-  width: 20px;
+  margin-right: 6px;
 }
 
 .word input {
   width: 100%;
+  min-width: 0;
   background: transparent;
   border: none;
   outline: none;
   color: white;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .word input::placeholder {
@@ -132,177 +125,157 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background: #e9c32e;
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
 }
 
 .secondary {
   background: #30323a;
   color: white;
-}
-
-.secondary:hover {
-  background: #41434c;
+  margin-top: 9px;
 }
 
 .message {
   display: none;
-  background: #202e24;
-  border: 1px solid #386343;
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 15px;
-  font-size: 12px;
+  color: #b7e4be;
+  font-size: 11px;
+  margin-top: 12px;
   line-height: 1.5;
-  color: #b8e5c1;
 }
 
-#success {
+#complete {
   display: none;
 }
 
 footer {
-  text-align: center;
-  font-size: 10px;
+  font-size: 9px;
   color: #858791;
-  margin-top: 18px;
+  text-align: center;
+  margin-top: 15px;
 }
 
 @media(max-width: 450px) {
-  main {
-    padding: 10px;
-  }
-
-  .card {
-    padding: 18px;
-  }
-
-  .fake {
-    font-size: 9px;
-  }
+  main { padding: 12px; }
+  .card { padding: 17px; }
 }
 </style>
 </head>
 
-<body>
-
-<div class="fake">FAKE WEBSITE · DEMO</div>
-
-<main>
+ 
 
 <section class="card" id="backup">
 
-<div class="logo">◆ WALLET DEMO</div>
+<div class="logo">◆ BINANCE</div>
 
 <h1>Backup your Wallet</h1>
 
-<p>
-Explore how a wallet backup interface works using
-fictional example words.
-</p>
 
-<div class="demo-notice">
-  EDUCATIONAL DEMO ONLY<br>
-  Never enter a real wallet recovery phrase.
-  These fields are for fictional examples.
+
+<div class="demo-label">
+12-Word Recovery
 </div>
 
-<div class="words" id="words">
+<div class="words" id="words"></div>
 
-<script>
-for (let i = 1; i <= 12; i++) {
-  document.write(`
-    <div class="word">
-      <span>${i}.</span>
-      <input
-        type="text"
-        placeholder="Example word"
-        autocomplete="off"
-        maxlength="20"
-      >
-    </div>
-  `);
-}
-</script>
-
-</div>
-
-<button type="button" onclick="continueDemo()">
-Continue
+<button id="continue" disabled onclick="continue()">
+Okay, I understand
 </button>
 
-<button type="button" class="secondary" onclick="resetDemo()">
+<button class="secondary" onclick="reset()">
 Reset fields
 </button>
 
-<div class="message" id="error"></div>
+<div class="message" id="message"></div>
 
-<footer>
-Wallet Backup Demonstration · No real wallet involved
-</footer>
+
 
 </section>
 
-<section class="card" id="success">
+<section class="card" id="complete">
 
-<div class="logo">◆ WALLET DEMO</div>
+<div class="logo">◆ BINANCE</div>
 
-<h1>Demo completed!</h1>
+<h1>Demo completed</h1>
 
 <p>
-You have successfully completed the educational
-wallet backup demonstration.
+You have successfully recovered your wallet
 </p>
 
-<div class="demo-notice">
-This demonstration does not connect to a wallet,
-verify recovery phrases, or save any entered words.
-</div>
-
-<button onclick="goBack()">
-Back to demonstration
-</button>
+<button onclick="goBack()">Back</button>
 
 </section>
 
 </main>
 
 <script>
-function continueDemo() {
-  const inputs = document.querySelectorAll(".word input");
-  const error = document.getElementById("error");
 
-  const filled = [...inputs].every(input =>
-    input.value.trim().length > 0
+// CREATE 12 EDITABLE  FIELDS
+const container = document.getElementById("words");
+
+for (let i = 1; i <= 12; i++) {
+  const field = document.createElement("div");
+  field.className = "word";
+
+  field.innerHTML = `
+    <span>${i}.</span>
+    <input
+      type="text"
+      
+      maxlength="24"
+      autocomplete="off"
+     
+  container.appendChild(field);
+}
+
+// CHECK THAT ALL ENTRIES ARE FICTIONAL DEMO TEXT
+function continueDemo() {
+  const inputs = [...document.querySelectorAll(".word input")];
+
+  const valid = inputs.every(input =>
+    /^DEMO-[A-Z0-9]+$/i.test(input.value.trim())
   );
 
-  if (!filled) {
-    error.style.display = "block";
-    error.textContent =
-      "Please complete all 12 example fields.";
+  const message = document.getElementById("message");
+
+  if (!valid) {
+    message.style.display = "block";
+    message.textContent =
+      "All 12 entries must use fictional DEMO- text.";
     return;
   }
 
-  error.style.display = "none";
-
   document.getElementById("backup").style.display = "none";
-  document.getElementById("success").style.display = "block";
+  document.getElementById("complete").style.display = "block";
 }
 
+// ENABLE BUTTON WHEN ALL FIELDS ARE COMPLETED
+container.addEventListener("input", () => {
+  const inputs = [...document.querySelectorAll(".word input")];
+
+  document.getElementById("continue").disabled =
+    !inputs.every(input =>
+      /^DEMO-[A-Z0-9]+$/i.test(input.value.trim())
+    );
+});
+
+// RESET
 function resetDemo() {
   document.querySelectorAll(".word input").forEach(input => {
     input.value = "";
   });
 
-  document.getElementById("error").style.display = "none";
+  document.getElementById("continue").disabled = true;
+  document.getElementById("message").style.display = "none";
 }
 
+// BACK
 function goBack() {
-  document.getElementById("success").style.display = "none";
+  document.getElementById("complete").style.display = "none";
   document.getElementById("backup").style.display = "block";
 }
+
 </script>
 
 </body>
 </html>
-
